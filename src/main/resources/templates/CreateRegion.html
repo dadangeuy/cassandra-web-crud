@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Food Recipe</title>
+    <title>Region</title>
 
     <!--Bulma-->
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -18,27 +18,17 @@
     <form id="form">
         <div class="field">
             <div class="control">
-                <input class="input" name="Title" placeholder="Title" type="text">
+                <input class="input" name="code" placeholder="Code" type="number">
             </div>
         </div>
         <div class="field">
             <div class="control">
-                <textarea class="textarea" name="Ingredients" placeholder="Ingredients" rows="4"></textarea>
+                <input class="input" name="parent_code" placeholder="Parent Code" type="number">
             </div>
         </div>
         <div class="field">
             <div class="control">
-                <textarea class="textarea" name="Steps" placeholder="Steps" rows="4"></textarea>
-            </div>
-        </div>
-        <div class="field">
-            <div class="control">
-                <input class="input" name="Loves" placeholder="Loves" type="text">
-            </div>
-        </div>
-        <div class="field">
-            <div class="control">
-                <input class="input" name="URL" placeholder="URL" type="text">
+                <input class="input" name="name" placeholder="Name" type="text">
             </div>
         </div>
         <button class="button is-primary is-outlined" type="submit">Create</button>

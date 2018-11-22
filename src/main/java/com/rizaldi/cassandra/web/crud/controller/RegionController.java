@@ -43,8 +43,8 @@ public class RegionController {
 
     @GetMapping("update/{id}")
     public String viewUpdateRegion(Model model, @PathVariable long id) {
-        var recipe = repository.findById(id).get();
-        model.addAttribute("recipe", recipe);
+        var region = repository.findById(id).get();
+        model.addAttribute("region", region);
         return "UpdateRegion";
     }
 
