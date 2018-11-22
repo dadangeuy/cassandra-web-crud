@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Recipe</title>
+
+    <!--Bulma-->
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <!--Handle Request-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+    <table class="table is-fullwidth is-striped is-bordered is-hoverable">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Code</th>
+            <th>Parent Code</th>
+            <th>Name</th>
+            <th>
+                <a class="button is-link is-outlined" href="/create">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="region, iregion : ${regions}">
+            <th th:text="${startIndex + iregion.index}"></th>
+            <td th:text="${region.code}"></td>
+            <td th:text="${region.parent_code}"></td>
+            <td th:text="${region.name}"></td>
+            <td>
+                <span>
+                <a class="button is-primary is-outlined" th:href="@{|/update/${region.code}|}">
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
+                <a class="button is-danger is-outlined" onclick="onClickDeleteButton(event)"
+                   th:href="@{|/api/delete/${region.code}|}">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <nav class="pagination" role="navigation">
+        <a class="pagination-previous" disabled th:if="${currentPage} == 0">Previous</a>
+        <a class="pagination-previous" th:href="@{|/list/${currentPage - 1}|}" th:if="${currentPage} > 0">Previous</a>
+        <a class="pagination-next" th:href="@{|/list/${currentPage + 1}|}">Next</a>
+        <ul class="pagination-list"></ul>
+    </nav>
+</div>
+
+<script type="text/javascript">
+    function onClickDeleteButton(event) {
+        event.preventDefault();
+        var request = $.get(event.target.href);
+        request.done(function () {
+            alert("Delete Success");
+            location.reload();
+        });
+    }
+</script>
+</body>
+</html>

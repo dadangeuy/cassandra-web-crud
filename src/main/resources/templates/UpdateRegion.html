@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Recipe</title>
+
+    <!--Bulma-->
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <!--Handle Request-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <form id="form">
+        <input name="id" th:value="${recipe.id}" type="hidden">
+        <div class="field">
+            <div class="control">
+                <input class="input" name="Title" placeholder="Title" th:value="${recipe.Title}" type="text">
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <textarea class="textarea" name="Ingredients" placeholder="Ingredients" rows="4"
+                          th:text="${recipe.Ingredients}"></textarea>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <textarea class="textarea" name="Steps" placeholder="Steps" rows="4"
+                          th:text="${recipe.Steps}"></textarea>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input class="input" name="Loves" placeholder="Loves" th:value="${recipe.Loves}" type="text">
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input class="input" name="URL" placeholder="URL" th:value="${recipe.URL}" type="text">
+            </div>
+        </div>
+        <button class="button is-primary is-outlined" type="submit">Update</button>
+        <a class="button is-danger is-outlined" href="/">Back</a>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $("#form").submit(function (event) {
+        event.preventDefault();
+        var data = $("#form").serializeObject();
+        var request = $.post("/api/save", data);
+        request.done(function () {
+            alert("Update Success");
+            location.reload();
+        });
+    });
+</script>
+</body>
+</html>
