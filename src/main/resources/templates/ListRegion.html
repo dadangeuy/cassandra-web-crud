@@ -63,11 +63,17 @@
 <script type="text/javascript">
     function onClickDeleteButton(event) {
         event.preventDefault();
-        var request = $.get(event.target.href);
-        request.done(function () {
-            alert("Delete Success");
-            location.reload();
-        });
+        $.get(event.target.href, deleteSuccess)
+            .error(deleteError);
+    }
+
+    function deleteSuccess() {
+        alert("Delete Success");
+        location.reload();
+    }
+
+    function deleteError(message) {
+        alert("Delete Error: " + message);
     }
 </script>
 </body>
