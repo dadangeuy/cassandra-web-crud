@@ -25,10 +25,13 @@ public class RegionController {
 
     @GetMapping("list/{pageNumber}")
     public String viewListRegion(Model model, @PathVariable int pageNumber) {
-        var regions = bruteForcePagination(pageNumber).getContent();
+        var regionSlice = bruteForcePagination(pageNumber);
+        var regions = regionSlice.getContent();
         model.addAttribute("regions", regions);
         model.addAttribute("startIndex", pageNumber * MAX_REGION_IN_PAGE + 1);
         model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("hasNext", regionSlice.hasNext());
+        model.addAttribute("hasPrevious", pageNumber > 0);
         return "ListRegion";
     }
 
@@ -43,11 +46,14 @@ public class RegionController {
 
     @GetMapping("find/{name}/{pageNumber}")
     public String viewListRegionWithName(Model model, @PathVariable String name, @PathVariable int pageNumber) {
-        var regions = bruteForceFindByNamePagination(name, pageNumber).getContent();
+        var regionSlice = bruteForceFindByNamePagination(name, pageNumber);
+        var regions = regionSlice.getContent();
         model.addAttribute("regions", regions);
         model.addAttribute("startIndex", pageNumber * MAX_REGION_IN_PAGE + 1);
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("name", name);
+        model.addAttribute("hasNext", regionSlice.hasNext());
+        model.addAttribute("hasPrevious", pageNumber > 0);
         return "FindRegion";
     }
 

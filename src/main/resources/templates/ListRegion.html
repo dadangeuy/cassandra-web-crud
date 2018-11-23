@@ -65,9 +65,10 @@
     </table>
 
     <nav class="pagination" role="navigation">
-        <a class="pagination-previous" disabled th:if="${currentPage} == 0">Previous</a>
-        <a class="pagination-previous" th:href="@{|/list/${currentPage - 1}|}" th:if="${currentPage} > 0">Previous</a>
-        <a class="pagination-next" th:href="@{|/list/${currentPage + 1}|}">Next</a>
+        <a class="pagination-previous" th:href="@{|/list/${currentPage - 1}|}" th:if="${hasPrevious}">Previous</a>
+        <a class="pagination-next" th:href="@{|/list/${currentPage + 1}|}" th:if="${hasNext}">Next</a>
+        <a class="pagination-previous" disabled th:if="${!hasPrevious}">Previous</a>
+        <a class="pagination-next" disabled th:if="${!hasNext}">Next</a>
         <ul class="pagination-list"></ul>
     </nav>
 </div>
