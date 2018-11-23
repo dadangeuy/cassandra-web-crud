@@ -41,6 +41,23 @@ public class RegionController {
         return repository.findAll(page);
     }
 
+    @GetMapping("find/{name}/{pageNumber}")
+    public String viewListRegionWithName(Model model, @PathVariable String name, @PathVariable int pageNumber) {
+        var regions = bruteForceFindByNamePagination(name, pageNumber).getContent();
+        model.addAttribute("regions", regions);
+        model.addAttribute("startIndex", pageNumber * MAX_REGION_IN_PAGE + 1);
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("name", name);
+        return "FindRegion";
+    }
+
+    private Slice<Region> bruteForceFindByNamePagination(String name, int pageNumber) {
+        var page = PageRequest.of(0, MAX_REGION_IN_PAGE).first();
+        for (int i = 0; i < pageNumber; i++)
+            page = repository.findByNameContains(name, page).nextPageable();
+        return repository.findByNameContains(name, page);
+    }
+
     @GetMapping("update/{id}")
     public String viewUpdateRegion(Model model, @PathVariable long id) {
         var region = repository.findById(id).get();

@@ -57,8 +57,8 @@
 
     <nav class="pagination" role="navigation">
         <a class="pagination-previous" disabled th:if="${currentPage} == 0">Previous</a>
-        <a class="pagination-previous" th:href="@{|/list/${currentPage - 1}|}" th:if="${currentPage} > 0">Previous</a>
-        <a class="pagination-next" th:href="@{|/list/${currentPage + 1}|}">Next</a>
+        <a class="pagination-previous" th:href="@{|/find/${name}/${currentPage - 1}|}" th:if="${currentPage} > 0">Previous</a>
+        <a class="pagination-next" th:href="@{|/find/${name}/${currentPage + 1}|}">Next</a>
         <ul class="pagination-list"></ul>
     </nav>
 </div>

@@ -4,6 +4,7 @@ import com.datastax.driver.core.DataType;
 import lombok.Data;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.SASI;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 @Data
@@ -14,6 +15,7 @@ public class Region {
     private long code;
     @CassandraType(type = DataType.Name.BIGINT)
     private long parent_code;
-    @CassandraType(type = DataType.Name.ASCII)
+    @SASI(indexMode = SASI.IndexMode.CONTAINS)
+    @CassandraType(type = DataType.Name.VARCHAR)
     private String name;
 }
