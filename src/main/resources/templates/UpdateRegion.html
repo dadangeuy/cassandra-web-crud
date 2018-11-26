@@ -51,7 +51,7 @@
     $("#form").submit(function (event) {
         event.preventDefault();
         var data = $("#form").serializeObject();
-        var request = $.post("/api/save", data);
+        var request = $.post("/api/update", data);
         request.done(function () {
             alert("Update Success");
             location.reload();

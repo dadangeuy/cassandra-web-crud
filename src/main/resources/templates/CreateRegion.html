@@ -50,7 +50,7 @@
     $("#form").submit(function (event) {
         event.preventDefault();
         var data = $("#form").serializeObject();
-        var request = $.post("/api/save", data);
+        var request = $.post("/api/create", data);
         request.done(function () {
             alert("Create Success");
             window.location = "/";

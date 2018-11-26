@@ -13,8 +13,13 @@ public class RegionApiController {
         this.repository = repository;
     }
 
-    @PostMapping("save")
-    private Region save(@ModelAttribute Region region) {
+    @PostMapping("create")
+    private Region create(@ModelAttribute Region region) {
+        return repository.insert(region);
+    }
+
+    @PostMapping("update")
+    private Region update(@ModelAttribute Region region) {
         return repository.save(region);
     }
 
